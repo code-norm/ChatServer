@@ -1,0 +1,29 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chatkit demo</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+    <script>
+      const tokenProvider = new Chatkit.TokenProvider({
+        url: "http://localhost:5000/chat/authenticate"
+      });
+
+      const chatManager = new Chatkit.ChatManager({
+        instanceLocator: "v1:us1:bb7c51cf-f5cf-4761-a4ce-622a50e099cb",
+        userId: "duy",
+        tokenProvider
+      });
+
+      chatManager
+        .connect()
+        .then(currentUser => {
+          console.log("Successful connection", currentUser);
+        })
+        .catch(err => {
+          console.log("Error on connection", err);
+        });
+    </script>
+  </body>
+</html>
